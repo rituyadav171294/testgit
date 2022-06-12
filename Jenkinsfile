@@ -4,24 +4,25 @@ pipeline {
 
     stages {
     
-        stage('Build') {
+        stage('git checkout') {
         
             steps {
                 echo 'building the application' 
             }
         }
         
-         stage('test') {
+         stage('sonar scanner') {
         
             steps {
                 echo 'testing the application' 
             }
         }
         
-         stage('deploy') {
+         stage('docker build and tag') {
         
             steps {
-                echo 'deplying the application' 
+                sh 'docker build ./ -t image:tag'
+                
             }
         }
     }
